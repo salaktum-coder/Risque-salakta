@@ -1,307 +1,351 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Risques Construction Côtière - Salakta</title>
+  <meta name="description" content="Alertes et actions : constructions illégales en bord de mer à Salakta. Informations, risques et contacts.">
   <style>
+    /* Reset & base */
+    * { box-sizing: border-box; }
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Inter', Arial, sans-serif;
       margin: 0;
-      padding: 20px;
-      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-      color: white;
-      min-height: 100vh;
+      color: #fff;
+      background: linear-gradient(180deg,#0f1724 0%, #112b4a 50%, #0d2544 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height: 1.5;
     }
 
-    .container {
+    a { color: inherit; text-decoration: none; }
+
+    /* Header / Hero */
+    .hero {
+      background-image:
+        linear-gradient(180deg, rgba(10,20,35,0.55), rgba(10,20,35,0.55)),
+        url('https://source.unsplash.com/1600x900/?mediterranean,beach');
+      background-size: cover;
+      background-position: center;
+      padding: 80px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .badge {
+      display:inline-block;
+      background: rgba(255,255,255,0.06);
+      padding: 6px 12px;
+      border-radius: 999px;
+      color:#ffd93d;
+      font-weight:600;
+      margin-bottom:18px;
+      letter-spacing:0.6px;
+    }
+    .hero h1 {
+      font-size: 34px;
+      margin: 8px 0 6px;
+      color: #fff;
+      text-shadow: 0 6px 30px rgba(0,0,0,0.6);
+    }
+    .hero p.lead {
       max-width: 900px;
       margin: 0 auto;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
-
-    .title {
-      text-align: center;
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #ff6b6b;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .subtitle {
-      text-align: center;
       font-size: 18px;
-      margin-bottom: 30px;
-      color: #ffd93d;
+      color: #e6eef8;
+      opacity: 0.95;
     }
-
-    .houses-diagram {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin: 40px 0;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 15px;
-    }
-
-    .house {
-      flex: 1 1 200px;
-      text-align: center;
-      padding: 15px;
-      border-radius: 10px;
-    }
-
-    .house-a { background: rgba(255, 107, 107, 0.8); border: 3px solid #ff4757; }
-    .house-b { background: rgba(255, 165, 0, 0.8); border: 3px solid #ff8c00; }
-    .house-c { background: rgba(46, 204, 113, 0.8); border: 3px solid #27ae60; }
-
-    .house-icon {
-      font-size: 40px;
-      margin-bottom: 10px;
-    }
-
-    .house-label {
-      font-weight: bold;
-      font-size: 18px;
-      margin-bottom: 5px;
-    }
-
-    .house-distance {
-      font-size: 14px;
-      color: #2c3e50;
-      font-weight: bold;
-    }
-
-    .sea-indicator {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      margin: 20px 0;
-      font-size: 20px;
-      text-align: center;
-    }
-
-    .warning-section,
-    .action-section,
-    .contact-info {
-      margin: 30px 0;
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    .warning-section {
-      background: rgba(231, 76, 60, 0.2);
-      border-left: 5px solid #e74c3c;
-    }
-
-    .action-section {
-      background: rgba(46, 204, 113, 0.2);
-      border-left: 5px solid #27ae60;
-    }
-
-    .contact-info {
-      background: rgba(52, 152, 219, 0.2);
-    }
-
-    .warning-title {
-      font-size: 22px;
-      font-weight: bold;
-      color: #ff6b6b;
-      margin-bottom: 10px;
-    }
-
-    .risk-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      margin: 30px 0;
-    }
-
-    .risk-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 20px;
-      border-left: 5px solid;
-    }
-
-    .risk-legal { border-color: #e74c3c; }
-    .risk-erosion { border-color: #f39c12; }
-    .risk-structural { border-color: #9b59b6; }
-    .risk-environmental { border-color: #3498db; }
-
-    .risk-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; }
-
-    .risk-level {
-      display: inline-block;
-      padding: 5px 12px;
-      border-radius: 15px;
-      font-size: 12px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .risk-high { background: #e74c3c; }
-    .risk-medium { background: #f39c12; }
-
-    ul { padding-left: 20px; }
-    li { margin: 6px 0; line-height: 1.4; }
-
-    .pulse {
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    .final-note {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #ffd93d;
-    }
-
-    .share-note {
-      text-align: center;
+    .cta {
       margin-top: 20px;
-      font-style: italic;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
     }
-
-    /* Section vote */
-    .vote-section {
-      text-align: center;
-      margin-top: 40px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 15px;
-    }
-
-    .vote-buttons button {
-      margin: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
+    .btn {
+      padding: 12px 18px;
+      border-radius: 10px;
       border: none;
-      border-radius: 8px;
+      font-weight: 700;
       cursor: pointer;
-      font-weight: bold;
+      box-shadow: 0 8px 20px rgba(2,6,23,0.45);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn-primary { background: linear-gradient(90deg,#00c6a7,#0197ff); color: #041022; }
+    .btn-secondary { background: rgba(255,255,255,0.07); color: #fff; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(2,6,23,0.55); }
+
+    /* Main container */
+    .container {
+      max-width: 1100px;
+      margin: -40px auto 60px;
+      padding: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(2,6,23,0.6);
+      border: 1px solid rgba(255,255,255,0.04);
     }
 
-    .btn-yes { background-color: #27ae60; color: white; }
-    .btn-no { background-color: #e74c3c; color: white; }
+    /* Photos row (marketing) */
+    .houses-photos {
+      display:flex;
+      gap:16px;
+      justify-content:center;
+      margin: 10px 0 22px;
+      flex-wrap:wrap;
+    }
+    .houses-photos .photo {
+      width: calc(33.333% - 10px);
+      min-width: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.5);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+    .houses-photos .photo img {
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      display:block;
+      transition: transform .45s ease;
+    }
+    .houses-photos .photo:hover { transform: translateY(-6px); }
+    .houses-photos .photo:hover img { transform: scale(1.06); }
+
+    /* Tag on photos */
+    .photo .label {
+      position:absolute;
+      left:12px;
+      bottom:10px;
+      background: rgba(0,0,0,0.45);
+      padding:6px 10px;
+      border-radius:8px;
+      font-weight:700;
+      font-size:14px;
+      color:#fff;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Info sections */
+    .sea-indicator {
+      text-align:center;
+      font-size:18px;
+      margin-top:6px;
+      color:#ffd7a6;
+      font-weight:700;
+    }
+
+    .grid {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top:22px;
+    }
+
+    .card {
+      padding:18px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 8px 20px rgba(2,6,23,0.45);
+    }
+
+    .warning {
+      border-left: 6px solid #ff6b6b;
+      background: linear-gradient(90deg, rgba(231,76,60,0.06), rgba(255,255,255,0.01));
+    }
+
+    .action {
+      border-left: 6px solid #27ae60;
+      background: linear-gradient(90deg, rgba(46,204,113,0.04), rgba(255,255,255,0.01));
+    }
+
+    .card h3 { margin:0 0 8px; color:#ffd93d; font-size:18px; }
+    .card p { margin: 6px 0; color: #e6eef8; }
+
+    /* Risk grid */
+    .risk-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap:14px;
+      margin-top:18px;
+    }
+    .risk-card {
+      padding:16px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-left:6px solid;
+      min-height:150px;
+    }
+    .risk-title { font-weight:800; margin-bottom:6px; font-size:15px; }
+    .risk-level { display:inline-block; padding:6px 10px; border-radius:999px; font-weight:800; font-size:12px; color:#fff; margin-bottom:10px; }
+
+    .risk-legal { border-color:#e74c3c; }
+    .risk-erosion { border-color:#f39c12; }
+    .risk-structural { border-color:#9b59b6; }
+    .risk-environmental { border-color:#3498db; }
+
+    .lvl-high { background:#e74c3c; }
+    .lvl-medium { background:#f39c12; }
+
+    ul { margin:0; padding-left:18px; color:#e6eef8; }
+    li { margin:6px 0; }
+
+    /* Contacts & Article */
+    .contact-info { margin-top:18px; padding:16px; border-radius:10px; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); }
+    .contact-info h3 { margin-top:0; color:#a8ddff; }
+
+    /* Footer note & share */
+    .final-note { text-align:center; margin-top:22px; font-weight:700; color:#ffd93d; font-size:18px; }
+    .share-note { text-align:center; margin-top:6px; opacity:0.95; font-style:italic; color:#dbeeff; }
+
+    /* Vote section */
+    .vote-section { margin-top:20px; text-align:center; padding:18px; border-radius:12px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); }
+    .vote-buttons { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:8px; }
+    .vote-buttons .vote-btn {
+      padding:12px 20px; border-radius:10px; font-weight:800; cursor:pointer; border:none; font-size:16px;
+      transition: transform .12s ease;
+    }
+    .vote-btn:active { transform:translateY(2px); }
+    .yes { background: linear-gradient(90deg,#30d17a,#05a66b); color:#04211a; box-shadow: 0 8px 24px rgba(2,6,23,0.45); }
+    .no { background: linear-gradient(90deg,#ff7a7a,#e74c3c); color:#fff; }
+
+    /* Lightbox */
+    #lightbox {
+      position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+      background: rgba(2,6,23,0.75); z-index:9999; padding:20px;
+    }
+    #lightbox img { max-width:95%; max-height:90%; border-radius:10px; box-shadow: 0 18px 60px rgba(0,0,0,0.9); }
+    #lightbox .close {
+      position:absolute; top:18px; right:18px; background:rgba(255,255,255,0.08); border-radius:999px; padding:8px 10px; cursor:pointer; color:#fff; font-weight:700; border:1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: 1fr; }
+      .houses-photos .photo img { height:180px; }
+    }
+    @media (max-width: 680px) {
+      .hero h1 { font-size:22px; }
+      .badge { display:none; }
+      .houses-photos .photo { width: 100%; }
+      .hero { padding:40px 18px; }
+      .container { margin-top:-20px; padding:18px; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1 class="title">🚨 Que faire en cas de problème de voisinage lié à des travaux 🚨</h1>
-    <h2 class="subtitle">Salakta - Côte de Mahdia - Risques pour tous les riverains</h2>
 
-    <!-- Maisons -->
-    <div class="houses-diagram">
-      <div class="house house-b">
-        <div class="house-icon">🏠</div>
-        <div class="house-label">MAISON B</div>
-        <div class="house-distance">EN DANGER</div>
-      </div>
+  <!-- HERO -->
+  <header class="hero" role="banner" aria-label="En-tête - Risques construction côtière Salakta">
+    <div class="badge">Salakta — Côte de Mahdia</div>
+    <h1>🚨 Que faire en cas de problème de voisinage lié à des travaux 🚨</h1>
+    <p class="lead">
+      Risques juridiques, érosion, et dangers structuraux : informations, actions à mener et contacts officiels pour protéger le littoral de Salakta.
+      Partagez pour sensibiliser — protégeons notre patrimoine.
+    </p>
 
-      <div class="house house-a pulse">
-        <div class="house-icon">🏗️</div>
-        <div class="house-label">MAISON A</div>
-        <div class="house-distance">R+3 + Ascenseur<br>ILLÉGALE</div>
-      </div>
-
-      <div class="house house-c">
-        <div class="house-icon">🏠</div>
-        <div class="house-label">MAISON C</div>
-        <div class="house-distance">EN DANGER</div>
-      </div>
+    <div class="cta" role="navigation" aria-label="Actions rapides">
+      <button class="btn btn-primary" onclick="document.getElementById('main').scrollIntoView({behavior:'smooth'})">Voir les risques & actions</button>
+      <a class="btn btn-secondary" href="https://www.facebook.com/salaktum" target="_blank" rel="noopener">Contactez-nous sur Facebook</a>
     </div>
+  </header>
 
-    <!-- Mer -->
+  <!-- MAIN -->
+  <main id="main" class="container" role="main">
+    <!-- Photos marketing -->
+    <section aria-label="Photos maisons en bord de mer" class="houses-photos" >
+      <!-- Replace URLs below with your own high-res images -->
+      <div class="photo" onclick="openLightbox(this.querySelector('img').src, 'Maison A')">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=70" alt="Maison A - Construction proche de la mer">
+        <div class="label">MAISON A — ILLÉGALE</div>
+      </div>
+      <div class="photo" onclick="openLightbox(this.querySelector('img').src, 'Maison B')">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=70" alt="Maison B - Riverain en danger">
+        <div class="label">MAISON B — EN DANGER</div>
+      </div>
+      <div class="photo" onclick="openLightbox(this.querySelector('img').src, 'Maison C')">
+        <img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?auto=format&fit=crop&w=1600&q=70" alt="Maison C - Voisinage exposé">
+        <div class="label">MAISON C — EN DANGER</div>
+      </div>
+    </section>
+
+    <!-- Sea indicator -->
     <div class="sea-indicator">
-      <span>🌊 MER MÉDITERRANÉE</span>
-      <span style="color: #ff6b6b;">⛔ ENVIRON 10 MÈTRES = ILLÉGAL</span>
+      <strong>🌊 MER MÉDITERRANÉE — ⛔ ENVIRON 10 MÈTRES = ILLÉGAL</strong>
     </div>
 
-    <!-- Avertissement -->
-    <div class="warning-section">
-      <div class="warning-title">⚠️ VIOLATION GRAVE DE LA LOI TUNISIENNE</div>
-      <p><strong>Distance minimale légale : 25 mètres</strong></p>
-      <p><strong>Distance réelle : environ 10 mètres = ILLÉGAL</strong></p>
-      <p>Cette construction expose à <strong>démolition obligatoire</strong> selon la réglementation APAL.</p>
+    <!-- Warning & Actions -->
+    <div class="grid" aria-label="Avertissements et actions">
+      <div class="card warning" aria-live="polite">
+        <h3>⚠️ VIOLATION GRAVE DE LA LOI TUNISIENNE</h3>
+        <p><strong>Distance minimale légale : 25 mètres</strong></p>
+        <p><strong>Distance réelle : environ 10 mètres = ILLÉGAL</strong></p>
+        <p>Cette construction expose à <strong>démolition obligatoire</strong> selon la réglementation APAL.</p>
+      </div>
+
+      <aside class="card action" aria-label="Que faire">
+        <h3>✅ QUE FAIRE SI VOUS CONSTRUISEZ ACTUELLEMENT ?</h3>
+        <ul>
+          <li><strong>ARRÊTEZ immédiatement</strong> si vous êtes à moins de 25m de la mer</li>
+          <li><strong>Consultez l'APAL</strong> avant tout projet côtier</li>
+          <li><strong>Respectez les 100m</strong> sans plan d'aménagement approuvé</li>
+          <li><strong>Étude géotechnique obligatoire</strong> en zone côtière</li>
+          <li><strong>Privilégiez les solutions durables</strong> (végétalisation, dunes)</li>
+        </ul>
+      </aside>
     </div>
 
-    <!-- Grille des risques -->
-    <div class="risk-grid">
-      <div class="risk-card risk-legal">
+    <!-- Risk Grid -->
+    <section class="risk-grid" aria-label="Grille des risques">
+      <article class="risk-card risk-legal">
         <div class="risk-title">🏛️ RISQUE JURIDIQUE</div>
-        <div class="risk-level risk-high">TRÈS ÉLEVÉ</div>
+        <div class="risk-level lvl-high">TRÈS ÉLEVÉ</div>
         <ul>
           <li>Construction interdite à -25m</li>
           <li>Violation domaine public maritime</li>
           <li>Démolition/alignement forcé</li>
           <li>Amendes et poursuites</li>
         </ul>
-      </div>
+      </article>
 
-      <div class="risk-card risk-erosion">
+      <article class="risk-card risk-erosion">
         <div class="risk-title">🌊 ÉROSION CÔTIÈRE</div>
-        <div class="risk-level risk-high">CRITIQUE</div>
+        <div class="risk-level lvl-high">CRITIQUE</div>
         <ul>
           <li>35% des plages en érosion</li>
           <li>Affouillement des fondations</li>
           <li>Recul du rivage accéléré</li>
           <li>Perte de terrain certain</li>
         </ul>
-      </div>
+      </article>
 
-      <div class="risk-card risk-structural">
+      <article class="risk-card risk-structural">
         <div class="risk-title">🏗️ RISQUES STRUCTURELS</div>
-        <div class="risk-level risk-high">ÉLEVÉ</div>
+        <div class="risk-level lvl-high">ÉLEVÉ</div>
         <ul>
           <li>Déstabilisation maisons voisines</li>
           <li>Fissuration en cascade</li>
           <li>Tassements différentiels</li>
           <li>Corrosion accélérée (embruns)</li>
         </ul>
-      </div>
+      </article>
 
-      <div class="risk-card risk-environmental">
+      <article class="risk-card risk-environmental">
         <div class="risk-title">🌍 IMPACT ENVIRONNEMENTAL</div>
-        <div class="risk-level risk-high">GRAVE</div>
+        <div class="risk-level lvl-high">GRAVE</div>
         <ul>
           <li>Submersion marine (+10%)</li>
           <li>Déséquilibres sédimentaires</li>
           <li>Dégradation écosystème</li>
           <li>Pollution marine</li>
         </ul>
-      </div>
-    </div>
-
-    <!-- Actions -->
-    <div class="action-section">
-      <div class="action-title">✅ QUE FAIRE SI VOUS CONSTRUISEZ ACTUELLEMENT ?</div>
-      <ul>
-        <li><strong>ARRÊTEZ immédiatement</strong> si vous êtes à moins de 25m de la mer</li>
-        <li><strong>Consultez l'APAL</strong> avant tout projet côtier</li>
-        <li><strong>Respectez les 100m</strong> sans plan d'aménagement approuvé</li>
-        <li><strong>Étude géotechnique obligatoire</strong> en zone côtière</li>
-        <li><strong>Privilégiez les solutions durables</strong> (végétalisation, dunes)</li>
-      </ul>
-    </div>
+      </article>
+    </section>
 
     <!-- Contacts -->
-    <div class="contact-info">
+    <section class="contact-info" aria-label="Contacts officiels">
       <h3>📞 SIGNALER UNE CONSTRUCTION ILLÉGALE :</h3>
       <ul>
         <li><strong>APAL :</strong> apal.nat.tn</li>
@@ -309,9 +353,10 @@
         <li><strong>Gouvernorat de Mahdia</strong></li>
         <li><strong>Commune de Salakta</strong></li>
       </ul>
-    </div>
+    </section>
 
-    <div class="contact-info">
+    <!-- Articles de loi -->
+    <section class="contact-info" aria-label="Articles de loi">
       <h3>📜 ARTICLE DE LOI :</h3>
       <ul>
         <li><strong>1️⃣ Interdiction de construire dans la bande des 25 mètres</strong><br>
@@ -328,22 +373,61 @@
           Décret n°2000-1991 du 17 septembre 2000.
         </li>
       </ul>
-    </div>
+    </section>
 
-    <!-- Note finale -->
+    <!-- Final note & share -->
     <div class="final-note">🛡️ PROTÉGEONS NOTRE LITTORAL - RESPECTONS LA LOI 🛡️</div>
     <div class="share-note">Partagez pour sensibiliser vos proches et voisins constructeurs !</div>
 
-    <!-- Section vote -->
-    <div class="vote-section">
-      <p>Êtes-vous d’accord pour préserver le patrimoine de Salakta et le respect de la loi ?</p>
-      <div class="vote-buttons">
-        <button class="btn-yes" onclick="window.open('https://www.facebook.com/salaktum', '_blank')">✅ Oui</button>
-        <button class="btn-no" onclick="alert('Merci pour votre réponse. Votre avis est pris en compte.')">❌ Non</button>
+    <!-- Vote -->
+    <div class="vote-section" role="form" aria-label="Vote">
+      <p style="font-weight:800; margin:0;">👉 Êtes-vous d’accord pour préserver le patrimoine de Salakta et le respect de la loi ?</p>
+      <div class="vote-buttons" aria-hidden="false">
+        <button class="vote-btn yes" onclick="window.open('https://www.facebook.com/salaktum','_blank')">✅ Oui</button>
+        <button class="vote-btn no" onclick="alert('Merci pour votre réponse. Votre avis est pris en compte.')">❌ Non</button>
       </div>
     </div>
+  </main>
 
+  <!-- LIGHTBOX -->
+  <div id="lightbox" role="dialog" aria-modal="true" onclick="closeLightbox(event)">
+    <button class="close" aria-label="Fermer" onclick="closeLightbox(event)">✕</button>
+    <img id="lightbox-img" src="" alt="Agrandissement image">
   </div>
-</body>
 
+  <script>
+    /* Lightbox */
+    function openLightbox(src, alt) {
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      img.alt = alt || 'Photo';
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(e) {
+      if (e && e.target && (e.target.id === 'lightbox' || e.target.classList.contains('close'))) {
+        document.getElementById('lightbox').style.display = 'none';
+        document.getElementById('lightbox-img').src = '';
+        document.body.style.overflow = '';
+      }
+    }
+    // Allow ESC to close
+    document.addEventListener('keydown', function(ev) {
+      if (ev.key === 'Escape') {
+        const lb = document.getElementById('lightbox');
+        if (lb.style.display === 'flex') {
+          lb.style.display = 'none';
+          document.getElementById('lightbox-img').src = '';
+          document.body.style.overflow = '';
+        }
+      }
+    });
+
+    // Ensure clicks inside image won't close lightbox
+    document.getElementById('lightbox').addEventListener('click', function(e){
+      if (e.target.tagName === 'IMG') e.stopPropagation();
+    });
+  </script>
+</body>
 </html>
